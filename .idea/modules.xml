@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lectiophile.iml" filepath="$PROJECT_DIR$/Lectiophile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LectiophileApp/LectiophileApp.iml" filepath="$PROJECT_DIR$/LectiophileApp/LectiophileApp.iml" />
+    </modules>
+  </component>
+</project>
