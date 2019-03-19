@@ -12,5 +12,7 @@
     <string name="share_data">Some sample text</string>
     <string name="article_title">Title of the article</string>
     <string name="subtitle_of_the_article">Subtitle of the article</string>
+    <string name="not_available">N/A</string>
+    <string name="random_text">Random text</string>
 
 </resources>
