@@ -51,16 +51,16 @@ import okhttp3.OkHttpClient;
 public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String TAG = ArticleListActivity.class.toString();
+    private static final String TAG = "ArticleListActivity";
     private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
-    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
     private Adapter adapter;
     private DecorationUtils mDividerItemDecoration;
 
@@ -139,7 +139,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private Cursor mCursor;
 
-        public Adapter(Cursor cursor) {
+        Adapter(Cursor cursor) {
             mCursor = cursor;
         }
 
@@ -156,6 +156,7 @@ public class ArticleListActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d(TAG, "onClick: onCreateViewHolder called");
                     startActivity(new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
                 }
@@ -191,8 +192,8 @@ public class ArticleListActivity extends AppCompatActivity implements
             } else {
                 holder.subtitleView.setText(Html.fromHtml(
                         outputFormat.format(publishedDate)
-                        + "<br/>" + " by "
-                        + mCursor.getString(ArticleLoader.Query.AUTHOR)));
+                                + "<br/>" + " by "
+                                + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
 
             Picasso.get()
@@ -256,14 +257,13 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         @Override
         public int getNewListSize() {
-            return newCursor == null? 0 : newCursor.getCount();
+            return newCursor == null ? 0 : newCursor.getCount();
         }
 
         @Override
         public final boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
             return oldCursor.getColumnCount() == newCursor.getColumnCount() && moveCursorsToPosition(oldItemPosition, newItemPosition) && areCursorRowsTheSame(oldCursor, newCursor);
         }
-
 
         @Override
         public final boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
@@ -276,6 +276,7 @@ public class ArticleListActivity extends AppCompatActivity implements
             moveCursorsToPosition(oldItemPosition, newItemPosition);
             return getChangePayload(newCursor, oldCursor);
         }
+
         @Nullable
         public Object getChangePayload(C newCursor, C oldCursor) {
             return null;
@@ -286,8 +287,10 @@ public class ArticleListActivity extends AppCompatActivity implements
             boolean oldMoved = oldCursor.moveToPosition(oldItemPosition);
             return newMoved && oldMoved;
         }
-        /** Cursors are already moved to positions where you should obtain data by row.
-         *  Checks if contents at row are same
+
+        /**
+         * Cursors are already moved to positions where you should obtain data by row.
+         * Checks if contents at row are same
          *
          * @param oldCursor Old cursor object
          * @param newCursor New cursor object
@@ -295,8 +298,10 @@ public class ArticleListActivity extends AppCompatActivity implements
          */
         public abstract boolean areRowContentsTheSame(Cursor oldCursor, Cursor newCursor);
 
-        /** Cursors are already moved to positions where you should obtain data from row
-         *  Checks if rows are the same, ideally, check by unique id
+        /**
+         * Cursors are already moved to positions where you should obtain data from row
+         * Checks if rows are the same, ideally, check by unique id
+         *
          * @param oldCursor Old cursor object
          * @param newCursor New cursor object
          * @return See DiffUtil
@@ -312,7 +317,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         ViewHolder(View view) {
             super(view);
-            thumbnailView =  view.findViewById(R.id.thumbnail);
+            thumbnailView = view.findViewById(R.id.thumbnail);
             titleView = view.findViewById(R.id.article_title);
             subtitleView = view.findViewById(R.id.article_subtitle);
             pbImage = view.findViewById(R.id.pb_image);
