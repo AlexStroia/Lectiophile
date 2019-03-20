@@ -15,4 +15,7 @@
     <string name="not_available">N/A</string>
     <string name="random_text">Random text</string>
 
+    <!--Transition-->
+    <string name="TRANSITION_PHOTO">TRANSITION_PHOTO</string>
+
 </resources>

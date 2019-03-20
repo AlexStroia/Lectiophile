@@ -157,6 +157,7 @@ public class ArticleListActivity extends AppCompatActivity implements
                 @Override
                 public void onClick(View view) {
                     Log.d(TAG, "onClick: onCreateViewHolder called");
+                    Log.d(TAG, "onClick: " +  ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString());
                     startActivity(new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
                 }
