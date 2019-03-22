@@ -1,27 +1,17 @@
 package com.example.xyzreader.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import co.alexdev.data.model.Book;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.databinding.ActivityArticleListBinding;
-import com.example.xyzreader.utils.DividerDecoration;
 import com.example.xyzreader.viewmodel.ArticleListActivityViewModel;
 
-import java.util.List;
-
-/**
- * An activity representing a list of Articles. This activity has different presentations for
- * handset and tablet-size devices. On handsets, the activity presents a list of items, which when
- * touched, lead to a {@link ArticleDetailActivity} representing item details. On tablets, the
- * activity presents a grid of items as cards.
- */
 public class ArticleListActivity extends AppCompatActivity {
 
     private static final String TAG = "ArticleListActivity";
@@ -35,39 +25,34 @@ public class ArticleListActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_list);
 
         vm = ViewModelProviders.of(this).get(ArticleListActivityViewModel.class);
+        getLifecycle().addObserver(vm);
+        mBinding.setViewModel(vm);
         initView();
     }
 
     private void initView() {
         fetchData();
-
-        mBinding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (mBinding.swipeRefreshLayout.isRefreshing()) {
-                mBinding.swipeRefreshLayout.setRefreshing(false);
-                mAdapter.setData(vm.getmBookList());
-            }
-        });
+        initSwipeRefreshLayout();
     }
 
-    private void setRecyclerView(List<Book> books) {
-        mAdapter = new LectiophileAdapter();
-        mBinding.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        mBinding.recyclerView.setAdapter(mAdapter);
-        mBinding.recyclerView.addItemDecoration(new DividerDecoration(8));
-        mAdapter.setData(books);
+    private void initSwipeRefreshLayout() {
+        mBinding.swipeRefreshLayout.setOnRefreshListener(() -> vm.setIsRefreshing(mBinding.swipeRefreshLayout.isRefreshing()));
+
+        vm.getIsRefreshing().observe(this, isRefreshing -> {
+            if (isRefreshing) mBinding.swipeRefreshLayout.setRefreshing(false);
+            if (mAdapter != null) {
+                mAdapter.setData(vm.getBooksObservable());
+            }
+        });
     }
 
     private void fetchData() {
         vm.getBooks().observe(this, listResourceBooks -> {
             if (listResourceBooks.data != null && listResourceBooks.data.size() > 0) {
-                vm.setList(listResourceBooks.data);
-                setRecyclerView(vm.getmBookList());
+                vm.mapToBookViewModel(listResourceBooks.data);
+                Log.d(TAG, "fetchData: " + vm.getBooksObservable().size());
+                //   setRecyclerView(vm.getmBookList());
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 }

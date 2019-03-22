@@ -23,4 +23,45 @@ public class BookViewModel {
         this.aspect_ratio = new ObservableDouble();
         this.published_date = new ObservableField<>();
     }
+
+    public ObservableInt getId() {
+        return id;
+    }
+
+    public ObservableField<String> getTitle() {
+        return title;
+    }
+
+    public ObservableField<String> getAuthor() {
+        return author;
+    }
+
+    public ObservableField<String> getBody() {
+        return body;
+    }
+
+    public ObservableField<String> getThumb() {
+        return thumb;
+    }
+
+    public ObservableDouble getAspect_ratio() {
+        return aspect_ratio;
+    }
+
+    public ObservableField<String> getPublished_date() {
+        return published_date;
+    }
+
+    @Override
+    public String toString() {
+        return "BookViewModel{" +
+                "id=" + id +
+                ", title=" + title +
+                ", author=" + author +
+                ", body=" + body +
+                ", thumb=" + thumb +
+                ", aspect_ratio=" + aspect_ratio +
+                ", published_date=" + published_date +
+                '}';
+    }
 }

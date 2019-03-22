@@ -2,37 +2,56 @@ package com.example.xyzreader.viewmodel;
 
 import android.app.Application;
 
-import java.util.ArrayList;
+import com.example.xyzreader.model.BookViewModel;
+import com.example.xyzreader.model.ItemsToVmMapper;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import co.alexdev.data.model.Book;
 import co.alexdev.data.networking.Resource;
 import co.alexdev.data.repo.LectiophileRepository;
 
-public class ArticleListActivityViewModel extends AndroidViewModel {
+public class ArticleListActivityViewModel extends AndroidViewModel implements LifecycleObserver {
 
     private LiveData<Resource<List<Book>>> mBooksLiveData;
-    private List<Book> mBooks;
+    private MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
+    private ObservableList<BookViewModel> mBooksObservable;
 
     public ArticleListActivityViewModel(@NonNull Application application) {
         super(application);
 
+        isRefreshing.setValue(false);
         mBooksLiveData = LectiophileRepository.getInstance(this.getApplication()).getBooks();
-        mBooks = new ArrayList<>();
+        mBooksObservable = new ObservableArrayList<>();
+    }
+
+    /*Get the current data of Books and make them Observable*/
+    public void mapToBookViewModel(List<Book> books) {
+        if (mBooksObservable.isEmpty()) {
+            mBooksObservable.addAll(new ItemsToVmMapper().map(books));
+        }
     }
 
     public LiveData<Resource<List<Book>>> getBooks() {
         return mBooksLiveData;
     }
 
-    public void setList(List<Book> books) {
-        this.mBooks = books;
+    public ObservableList<BookViewModel> getBooksObservable() {
+        return mBooksObservable;
     }
 
-    public List<Book> getmBookList() {
-        return mBooks;
+    public void setIsRefreshing(Boolean isRefreshing) {
+        this.isRefreshing.setValue(isRefreshing);
+    }
+
+    public MutableLiveData<Boolean> getIsRefreshing() {
+        return isRefreshing;
     }
 }

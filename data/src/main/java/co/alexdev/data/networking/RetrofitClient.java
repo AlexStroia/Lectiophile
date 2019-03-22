@@ -16,7 +16,7 @@ public class RetrofitClient {
 
     private RetrofitClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         mRetrofit = new Retrofit.Builder().baseUrl(BuildConfig.URL)
                 .client(new OkHttpClient().newBuilder().addInterceptor(interceptor).build())

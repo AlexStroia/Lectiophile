@@ -2,6 +2,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.xyzreader.viewmodel.ArticleListActivityViewModel"/>
+
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/_8dp"
+                app:items="@{viewModel.getBooksObservable}"
                 android:clipToPadding="false"
                 android:scrollbarStyle="outsideOverlay" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
