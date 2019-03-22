@@ -6,9 +6,7 @@ import android.view.ViewGroup;
 
 import com.example.xyzreader.databinding.ListItemArticleBinding;
 import com.example.xyzreader.model.BookViewModel;
-import com.example.xyzreader.utils.DateUtils;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.ItemListViewHolder> {
 
     private List<BookViewModel> mBooks;
+    private static OnBookSelectedListener mListener;
 
     public LectiophileAdapter() {
         this.mBooks = new ArrayList<>();
@@ -58,7 +57,8 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
 
         @Override
         public void onClick(View view) {
-
+            int position = getAdapterPosition();
+            mListener.onBookItemClick(position);
         }
     }
 }
