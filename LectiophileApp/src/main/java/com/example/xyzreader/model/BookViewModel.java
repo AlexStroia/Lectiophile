@@ -1,5 +1,8 @@
 package com.example.xyzreader.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -51,6 +54,7 @@ public class BookViewModel {
     public ObservableField<String> getPublished_date() {
         return published_date;
     }
+
 
     @Override
     public String toString() {

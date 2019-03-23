@@ -1,11 +1,14 @@
 package com.example.xyzreader.ui;
 
+import android.content.Intent;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import co.alexdev.data.repo.LectiophileRepository;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
@@ -55,14 +58,15 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
             if (listResourceBooks.data != null && listResourceBooks.data.size() > 0) {
                 vm.mapToBookViewModel(listResourceBooks.data);
                 Log.d(TAG, "fetchData: " + vm.getBooksObservable().size());
-                //   setRecyclerView(vm.getmBookList());
             }
         });
     }
 
     @Override
-    public void onBookItemClick(BookViewModel bookViewModel) {
-
-        Log.d(TAG, "onBookItemClick: " + bookViewModel);
+    public void onBookItemClick(int id) {
+        Intent intent = new Intent(this, ArticleDetailActivity.class);
+        intent.putExtra(getString(R.string.book_click),id);
+        startActivity(intent);
+        Log.d(TAG, "onBookItemClick: " + id);
     }
 }

@@ -58,4 +58,8 @@ public class LectiophileRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Book> getBookById(int id) {
+        return LectiophileDatabase.getInstance(mContext).getBooksDao().getBookById(id);
+    }
 }

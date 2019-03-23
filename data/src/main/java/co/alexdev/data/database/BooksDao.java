@@ -18,4 +18,7 @@ public interface BooksDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Book> books);
+
+    @Query("SELECT * FROM BOOK where id =:id")
+    LiveData<Book> getBookById(int id);
 }

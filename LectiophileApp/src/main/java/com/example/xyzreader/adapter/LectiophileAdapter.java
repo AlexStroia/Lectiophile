@@ -66,7 +66,7 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
                 int position = getAdapterPosition();
 
                 if (mListener != null) {
-                    mListener.onBookItemClick(mBooks.get(position));
+                    mListener.onBookItemClick(mBooks.get(position).getId().get());
                 }
             });
         }
