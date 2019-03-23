@@ -1,5 +1,6 @@
 package com.example.xyzreader.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.ItemListViewHolder> {
 
-    private List<BookViewModel> mBooks;
+    private static List<BookViewModel> mBooks;
     private static OnBookSelectedListener mListener;
 
     public LectiophileAdapter() {
@@ -36,7 +37,7 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
     }
 
     public void setData(List<BookViewModel> books) {
-        this.mBooks = books;
+        mBooks = books;
         notifyDataSetChanged();
     }
 
@@ -46,19 +47,28 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
         return mBooks.size();
     }
 
-    static class ItemListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void setListener(OnBookSelectedListener listener) {
+        if (mListener == null) {
+            mListener = listener;
+        }
+    }
+
+    static class ItemListViewHolder extends RecyclerView.ViewHolder {
 
         private ListItemArticleBinding mBinding;
+        private static final String TAG = "ItemListViewHolder";
 
         ItemListViewHolder(@NonNull ListItemArticleBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
-        }
 
-        @Override
-        public void onClick(View view) {
-            int position = getAdapterPosition();
-            mListener.onBookItemClick(position);
+            this.mBinding.getRoot().setOnClickListener(view -> {
+                int position = getAdapterPosition();
+
+                if (mListener != null) {
+                    mListener.onBookItemClick(mBooks.get(position));
+                }
+            });
         }
     }
 }

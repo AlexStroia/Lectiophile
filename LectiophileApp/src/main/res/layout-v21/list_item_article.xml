@@ -19,7 +19,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.thumb.get()}"
+                app:progressBar="@{pbimage}"
+                android:transitionName="@string/TRANSITION_PHOTO"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,3:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/article_title"
@@ -59,21 +76,6 @@
                 app:layout_constraintStart_toStartOf="@id/thumbnail"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="@dimen/_0dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.thumb.get()}"
-                app:progressBar="@{pbimage}"
-                android:transitionName="@string/TRANSITION_PHOTO"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="w,3:2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

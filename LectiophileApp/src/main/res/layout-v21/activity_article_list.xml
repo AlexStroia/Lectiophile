@@ -6,7 +6,6 @@
         <variable
             name="viewModel"
             type="com.example.xyzreader.viewmodel.ArticleListActivityViewModel"/>
-
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -10,14 +10,16 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.databinding.ActivityArticleListBinding;
+import com.example.xyzreader.model.BookViewModel;
+import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
 import com.example.xyzreader.viewmodel.ArticleListActivityViewModel;
 
-public class ArticleListActivity extends AppCompatActivity {
+public class ArticleListActivity extends AppCompatActivity implements OnBookSelectedListener {
 
     private static final String TAG = "ArticleListActivity";
     private ArticleListActivityViewModel vm;
     private ActivityArticleListBinding mBinding;
-    LectiophileAdapter mAdapter;
+    private LectiophileAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class ArticleListActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mAdapter = new LectiophileAdapter();
+        mAdapter.setListener(this);
         fetchData();
         initSwipeRefreshLayout();
     }
@@ -54,5 +58,11 @@ public class ArticleListActivity extends AppCompatActivity {
                 //   setRecyclerView(vm.getmBookList());
             }
         });
+    }
+
+    @Override
+    public void onBookItemClick(BookViewModel bookViewModel) {
+
+        Log.d(TAG, "onBookItemClick: " + bookViewModel);
     }
 }

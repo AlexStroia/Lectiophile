@@ -2,9 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.xyzreader.model.BookViewModel"/>
+            type="com.example.xyzreader.model.BookViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -19,13 +20,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/randimg"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.thumb.get()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:progressBar="@{pbimage}" />
+
             <TextView
                 android:id="@+id/article_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8dp"
-                android:text="@{viewModel.title}"
                 android:fontFamily="@font/kollektif_bold"
+                android:text="@{viewModel.title}"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,23 +73,7 @@
                 app:layout_constraintEnd_toEndOf="@id/thumbnail"
                 app:layout_constraintStart_toStartOf="@id/thumbnail"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <!--suppress AndroidLintContentDescription -->
-            <ImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="@dimen/_0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/randimg"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.thumb.get()}"
-                app:progressBar="@{pbimage}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="w,1:5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+            
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
