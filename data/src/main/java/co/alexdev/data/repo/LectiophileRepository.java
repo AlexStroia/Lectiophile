@@ -62,4 +62,12 @@ public class LectiophileRepository {
     public LiveData<Book> getBookById(int id) {
         return LectiophileDatabase.getInstance(mContext).getBooksDao().getBookById(id);
     }
+
+    public LiveData<List<Integer>> getBooksIdList() {
+        return LectiophileDatabase.getInstance(mContext).getBooksDao().getBooksIdList();
+    }
+
+    public LiveData<List<Book>> getBooksList() {
+        return LectiophileDatabase.getInstance(mContext).getBooksDao().getBooks();
+    }
 }

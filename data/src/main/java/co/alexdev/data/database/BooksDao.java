@@ -21,4 +21,7 @@ public interface BooksDao {
 
     @Query("SELECT * FROM BOOK where id =:id")
     LiveData<Book> getBookById(int id);
+
+    @Query("SELECT id FROM BOOK")
+    LiveData<List<Integer>> getBooksIdList();
 }

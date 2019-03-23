@@ -18,18 +18,20 @@ import co.alexdev.data.model.Book;
 import co.alexdev.data.networking.Resource;
 import co.alexdev.data.repo.LectiophileRepository;
 
-public class ArticleListActivityViewModel extends AndroidViewModel implements LifecycleObserver {
+public class ArticleListViewModel extends AndroidViewModel implements LifecycleObserver {
 
     private LiveData<Resource<List<Book>>> mBooksLiveData;
     private MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
     private ObservableList<BookViewModel> mBooksObservable;
+    private BookViewModel mBookViewModel;
 
-    public ArticleListActivityViewModel(@NonNull Application application) {
+    public ArticleListViewModel(@NonNull Application application) {
         super(application);
 
         isRefreshing.setValue(false);
         mBooksLiveData = LectiophileRepository.getInstance(this.getApplication()).getBooks();
         mBooksObservable = new ObservableArrayList<>();
+        mBookViewModel = new BookViewModel();
     }
 
     /*Get the current data of Books and make them Observable*/

@@ -1,120 +1,139 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/draw_insets_frame_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <data>
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        <variable
+            name="viewModel"
+            type="com.example.xyzreader.viewmodel.ArticleDetailViewModel" />
+    </data>
 
-            <FrameLayout
-                android:id="@+id/photo_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/_8dp"
-                android:fitsSystemWindows="true">
-                <!--suppress AndroidLintContentDescription -->
-                <ImageView
-                    android:id="@+id/photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_300dp"
-                    android:layout_gravity="top"
-                    android:contentDescription="@null"
-                    android:scaleType="centerCrop"
-                    android:transitionName="@string/TRANSITION_PHOTO" />
-
-                <LinearLayout
-                    android:id="@+id/meta_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@android:color/black"
-                    android:elevation="@dimen/_8dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/detail_inner_horiz_margin"
-                    android:paddingTop="@dimen/detail_metabar_vert_padding"
-                    android:paddingRight="@dimen/detail_inner_horiz_margin">
-
-                    <TextView
-                        android:id="@+id/article_title"
-                        style="?android:attr/textAppearanceLarge"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/kollektif_bold"
-                        android:lineSpacingMultiplier="0.9"
-                        android:text="@string/random_text"
-                        android:textColor="#fff"
-                        android:textSize="@dimen/detail_title_text_size"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/article_byline"
-                        style="?android:attr/textAppearanceSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/kollektif_italic"
-                        android:text="@string/random_text"
-                        android:textColor="#8fff" />
-                </LinearLayout>
-            </FrameLayout>
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.example.xyzreader.ui.ObservableScrollView
-        android:id="@+id/scrollview"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/draw_insets_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.example.xyzreader.ui.MaxWidthLinearLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/detail_card_top_margin"
-                android:background="#fff"
-                android:elevation="@dimen/_8dp"
-                android:maxWidth="@dimen/detail_card_max_width"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <TextView
-                    android:id="@+id/article_body"
-                    style="?android:attr/textAppearanceMedium"
+                <FrameLayout
+                    android:id="@+id/photo_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
-                    android:layout_marginRight="@dimen/detail_inner_horiz_margin"
-                    android:fontFamily="@font/kollektif_normal"
-                    android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-                    android:text="@string/random_text"
-                    android:textColor="@color/ltgray"
-                    android:textColorLink="@color/theme_accent"
-                    android:textSize="@dimen/detail_body_text_size_small" />
+                    android:elevation="@dimen/_8dp"
+                    android:fitsSystemWindows="true">
+                    <!--suppress AndroidLintContentDescription -->
+                    <ImageView
+                        android:id="@+id/photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_300dp"
+                        android:layout_gravity="top"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop"
+                        android:transitionName="@string/TRANSITION_PHOTO"
+                        app:progressBar="@{pbImage}"
+                        app:imageUrl="@{viewModel.mBookViewModel.thumb}" />
 
-            </com.example.xyzreader.ui.MaxWidthLinearLayout>
-        </FrameLayout>
-    </com.example.xyzreader.ui.ObservableScrollView>
+                    <LinearLayout
+                        android:id="@+id/meta_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="@android:color/black"
+                        android:elevation="@dimen/_8dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/detail_inner_horiz_margin"
+                        android:paddingTop="@dimen/detail_metabar_vert_padding"
+                        android:paddingRight="@dimen/detail_inner_horiz_margin">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/share_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:background="@drawable/add_fab_background"
-        android:contentDescription="@string/action_share"
-        android:src="@drawable/ic_share"
-        android:stateListAnimator="@anim/fab_state_list_anim" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                        <TextView
+                            android:id="@+id/article_title"
+                            style="?android:attr/textAppearanceLarge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/kollektif_bold"
+                            android:lineSpacingMultiplier="0.9"
+                            android:text="@{viewModel.mBookViewModel.title}"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/detail_title_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/article_byline"
+                            style="?android:attr/textAppearanceSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/kollektif_italic"
+                            android:text="@{viewModel.mBookViewModel.author}"
+                            android:textColor="#8fff" />
+                    </LinearLayout>
+                </FrameLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.example.xyzreader.ui.ObservableScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.example.xyzreader.ui.MaxWidthLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/detail_card_top_margin"
+                    android:background="#fff"
+                    android:elevation="@dimen/_8dp"
+                    android:maxWidth="@dimen/detail_card_max_width"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/article_body"
+                        style="?android:attr/textAppearanceMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
+                        android:layout_marginRight="@dimen/detail_inner_horiz_margin"
+                        android:fontFamily="@font/kollektif_normal"
+                        android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                        android:text="@{viewModel.mBookViewModel.body}"
+                        android:textColor="@color/ltgray"
+                        android:textColorLink="@color/theme_accent"
+                        android:textSize="@dimen/detail_body_text_size_small" />
+
+                </com.example.xyzreader.ui.MaxWidthLinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/pbImage"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+        </com.example.xyzreader.ui.ObservableScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:background="@drawable/add_fab_background"
+            android:contentDescription="@string/action_share"
+            android:src="@drawable/ic_share"
+            android:stateListAnimator="@anim/fab_state_list_anim" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

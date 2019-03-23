@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.xyzreader.viewmodel.ArticleListActivityViewModel"/>
+            type="com.example.xyzreader.viewmodel.ArticleListViewModel"/>
 
     </data>
 

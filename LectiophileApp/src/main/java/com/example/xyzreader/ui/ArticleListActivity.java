@@ -1,26 +1,23 @@
 package com.example.xyzreader.ui;
 
 import android.content.Intent;
-import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-import co.alexdev.data.repo.LectiophileRepository;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.databinding.ActivityArticleListBinding;
-import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
-import com.example.xyzreader.viewmodel.ArticleListActivityViewModel;
+import com.example.xyzreader.viewmodel.ArticleListViewModel;
 
 public class ArticleListActivity extends AppCompatActivity implements OnBookSelectedListener {
 
     private static final String TAG = "ArticleListActivity";
-    private ArticleListActivityViewModel vm;
+    private ArticleListViewModel vm;
     private ActivityArticleListBinding mBinding;
     private LectiophileAdapter mAdapter;
 
@@ -29,7 +26,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_list);
 
-        vm = ViewModelProviders.of(this).get(ArticleListActivityViewModel.class);
+        vm = ViewModelProviders.of(this).get(ArticleListViewModel.class);
         getLifecycle().addObserver(vm);
         mBinding.setViewModel(vm);
         initView();
