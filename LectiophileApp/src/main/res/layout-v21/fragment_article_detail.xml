@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -37,8 +38,8 @@
                         android:contentDescription="@null"
                         android:scaleType="centerCrop"
                         android:transitionName="@string/TRANSITION_PHOTO"
-                        app:progressBar="@{pbImage}"
-                        app:imageUrl="@{viewModel.mBookViewModel.thumb}" />
+                        app:imageUrl="@{viewModel.mBookViewModel.thumb}"
+                        app:progressBar="@{pbImage}" />
 
                     <LinearLayout
                         android:id="@+id/meta_bar"
@@ -89,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.example.xyzreader.ui.MaxWidthLinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -99,28 +100,46 @@
                     android:maxWidth="@dimen/detail_card_max_width"
                     android:orientation="vertical">
 
+
+                    <ProgressBar
+                        android:id="@+id/pbTextView"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:layout_constraintBottom_toTopOf="@+id/article_body"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
                     <TextView
                         android:id="@+id/article_body"
                         style="?android:attr/textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
-                        android:layout_marginRight="@dimen/detail_inner_horiz_margin"
                         android:fontFamily="@font/kollektif_normal"
                         android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-                        android:text="@{viewModel.mBookViewModel.body}"
                         android:textColor="@color/ltgray"
                         android:textColorLink="@color/theme_accent"
-                        android:textSize="@dimen/detail_body_text_size_small" />
+                        app:full_text="@{viewModel.mBookViewModel.body}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:progressBar="@{pbTextView}" />
 
-                </com.example.xyzreader.ui.MaxWidthLinearLayout>
+                    <!--
+                        android:text="@{viewModel.mBookViewModel.body}"
+-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ProgressBar
                     android:id="@+id/pbImage"
                     style="?android:attr/progressBarStyle"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
             </FrameLayout>
         </com.example.xyzreader.ui.ObservableScrollView>
 
