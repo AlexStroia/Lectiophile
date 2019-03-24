@@ -66,6 +66,7 @@ public class ArticleDetailFragment extends Fragment {
         bookLiveData.observe(this, book -> {
             bookLiveData.removeObservers(this);
             vm.mapToBookViewModel(bookLiveData.getValue());
+            vm.parseDataToParagraph(book.getBody());
         });
     }
 

@@ -1,6 +1,7 @@
 package com.example.xyzreader.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 
 import com.example.xyzreader.model.BodyViewModel;
@@ -24,6 +25,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     private LiveData<List<Integer>> mBooksIdsLiveData;
     private ObservableList<BodyViewModel> mBodyList;
     public BookViewModel mBookViewModel;
+    private static final String TAG = "ArticleDetailViewModel";
 
     public ArticleDetailViewModel(@NonNull Application application, int bookId) {
         super(application);
