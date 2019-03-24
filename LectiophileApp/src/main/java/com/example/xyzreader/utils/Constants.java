@@ -22,4 +22,11 @@ public class Constants {
         }
     }
 
+    public static class PARAGRAPH_PARAMS {
+        public static class NEW_LINE {
+            public static final String UNIX_REGEX ="\n";
+            public static final String OLD_MAC_REGEX ="\r";
+            public static final String WINDOWS_DOS="\\r?\\n";
+        }
+    }
 }

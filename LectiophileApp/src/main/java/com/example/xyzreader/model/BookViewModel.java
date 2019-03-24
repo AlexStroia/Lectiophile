@@ -1,8 +1,5 @@
 package com.example.xyzreader.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;

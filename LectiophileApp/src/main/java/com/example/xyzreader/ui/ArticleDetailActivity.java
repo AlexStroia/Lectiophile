@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.xyzreader.R;
-import com.example.xyzreader.adapter.FragmentArticleDetailAdapter;
 import com.example.xyzreader.databinding.ActivityArticleDetailBinding;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
@@ -43,7 +42,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
     private void initView(int id) {
         ViewModelFactory factory = new ViewModelFactory(this.getApplication(), id);
         vm = ViewModelProviders.of(this, factory).get(ArticleDetailViewModel.class);
-        vm.getBookId().observe(this, book -> {
+        vm.getBook().observe(this, book -> {
             Log.d(TAG, "initView: " + book.toString());
         });
 

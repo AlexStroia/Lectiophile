@@ -74,6 +74,14 @@
                             android:text="@={viewModel.mBookViewModel.author}"
                             android:textColor="#8fff" />
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/ib_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/ic_arrow_back" />
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -98,10 +106,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/article_body"
+                        android:id="@+id/tv_article_body"
                         style="?android:attr/textAppearanceMedium"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                         android:layout_marginRight="@dimen/detail_inner_horiz_margin"
                         android:fontFamily="@font/kollektif_normal"

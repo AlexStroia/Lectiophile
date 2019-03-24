@@ -16,7 +16,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import co.alexdev.data.model.Book;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class ArticleDetailFragment extends Fragment {
         ViewModelFactory factory = new ViewModelFactory(Objects.requireNonNull(this.getActivity()).getApplication(), fragmentContentId);
         vm = ViewModelProviders.of(this.getActivity(), factory).get(ArticleDetailViewModel.class);
 
-        LiveData<Book> bookLiveData = vm.getBookId();
+        LiveData<Book> bookLiveData = vm.getBook();
 
         bookLiveData.observe(this, book -> {
             bookLiveData.removeObservers(this);

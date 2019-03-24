@@ -74,6 +74,14 @@
                             android:text="@{viewModel.mBookViewModel.author}"
                             android:textColor="#8fff" />
                     </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/ib_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_arrow_back"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </FrameLayout>
 
 
@@ -107,16 +115,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:layout_constraintBottom_toTopOf="@+id/article_body"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_article_body"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="parent" />
 
                     <TextView
-                        android:id="@+id/article_body"
+                        android:id="@+id/tv_article_body"
                         style="?android:attr/textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8dp"
+                        android:layout_marginEnd="@dimen/_8dp"
                         android:fontFamily="@font/kollektif_normal"
                         android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
                         android:textColor="@color/ltgray"
@@ -128,9 +138,14 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:progressBar="@{pbTextView}" />
 
-                    <!--
-                        android:text="@{viewModel.mBookViewModel.body}"
--->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
