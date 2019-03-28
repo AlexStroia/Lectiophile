@@ -1,3 +1,9 @@
-= XYZ Reader Starter Code
+# Lectiophile
+Transformed the user experience of a news reading app using Fundamentals Material Design guidelines.
 
-This repository stores the starter code for the XYZ Reader project in Udacity's Android Nanodegree.
+# Features
+
+   • Grid Layout, ViewPager and Collapsing toolbar
+   • Surface, Elevation, Ripple, and FAB
+   • Palette, Background Protection and Aspect Ratio Image
+   • Motion, Content Transition and Shared element transition
