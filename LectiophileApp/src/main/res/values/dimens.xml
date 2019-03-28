@@ -15,6 +15,9 @@
     <dimen name="_2_5">2.5</dimen>
     <dimen name="_4dp">4dp</dimen>
     <dimen name="_8dp">8dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+    <dimen name="_60dp">60dp</dimen>
     <dimen name="_100dp">100dp</dimen>
     <dimen name="_144dp">144dp</dimen>
     <dimen name="_160dp">160dp</dimen>

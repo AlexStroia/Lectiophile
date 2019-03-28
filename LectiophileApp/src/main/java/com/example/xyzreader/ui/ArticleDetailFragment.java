@@ -1,10 +1,6 @@
 package com.example.xyzreader.ui;
 
 import android.content.Intent;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 import android.os.Bundle;
@@ -27,20 +23,7 @@ import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
 
 public class ArticleDetailFragment extends Fragment {
 
-    private static final String TAG = "ArticleDetailFragment";
     private FragmentArticleDetailBinding mBinding;
-
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
-    // Use default locale format
-    private SimpleDateFormat outputFormat = new SimpleDateFormat();
-    // Most time functions can only handle 1902 - 2037
-    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-
     private ArticleDetailViewModel vm;
 
     @Override
@@ -54,6 +37,7 @@ public class ArticleDetailFragment extends Fragment {
                 initViewModel(fragmentContentId);
             }
         }
+
         setHasOptionsMenu(true);
     }
 
@@ -62,7 +46,6 @@ public class ArticleDetailFragment extends Fragment {
         vm = ViewModelProviders.of(this.getActivity(), factory).get(ArticleDetailViewModel.class);
 
         LiveData<Book> bookLiveData = vm.getBook();
-
         bookLiveData.observe(this, book -> {
             bookLiveData.removeObservers(this);
             vm.mapToBookViewModel(bookLiveData.getValue());
@@ -82,18 +65,8 @@ public class ArticleDetailFragment extends Fragment {
                 .setText(getString(R.string.share_data))
                 .getIntent(), getString(R.string.action_share))));
 
+        mBinding.ibBack.setOnClickListener(view -> Objects.requireNonNull(ArticleDetailFragment.this.getActivity()).finish());
+        
         return mBinding.getRoot();
-    }
-
-    private Date parsePublishedDate() {
-/*        try {
-            String date = mCursor.getString(ArticleLoader.Query.PUBLISHED_DATE);
-            return dateFormat.parse(date);
-        } catch (ParseException ex) {
-            Log.e(TAG, ex.getMessage());
-            Log.i(TAG, "passing today's date");
-            return new Date();
-        }*/
-        return null;
     }
 }

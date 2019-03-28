@@ -1,5 +1,6 @@
 package com.example.xyzreader.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<FragmentArticleDetailBodyAdapter.FragmentArticleDetailAdapterViewHolder> {
 
     private List<BodyViewModel> mBody;
+    private static final String TAG = "FragmentArticleDetailBo";
 
     public FragmentArticleDetailBodyAdapter() {
         this.mBody = new ArrayList<>();
@@ -30,6 +32,8 @@ public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<Fragm
     @Override
     public void onBindViewHolder(@NonNull FragmentArticleDetailAdapterViewHolder holder, int position) {
         holder.mBinding.setViewModel(mBody.get(position));
+        Log.d(TAG, "onBindViewHolder: " + mBody.get(position).getParagraph().get());
+        Log.d(TAG, "onBindViewHolder: " + mBody.size());
     }
 
     @Override
@@ -43,8 +47,8 @@ public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<Fragm
         notifyDataSetChanged();
     }
 
-
     static class FragmentArticleDetailAdapterViewHolder extends RecyclerView.ViewHolder {
+
         private ListBodyItemBinding mBinding;
 
         public FragmentArticleDetailAdapterViewHolder(ListBodyItemBinding binding) {

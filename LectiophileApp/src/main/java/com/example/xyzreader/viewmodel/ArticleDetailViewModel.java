@@ -23,7 +23,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
 
     private LiveData<Book> mBook;
     private LiveData<List<Integer>> mBooksIdsLiveData;
-    public ObservableList<BodyViewModel> mBodyList;
+    private ObservableList<BodyViewModel> mBodyList;
     public BookViewModel mBookViewModel;
     private static final String TAG = "ArticleDetailViewModel";
 
@@ -52,6 +52,11 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     public void parseDataToParagraph(String body) {
         if (mBodyList.isEmpty()) {
             mBodyList = new StringToParagraphsMapper().map(body);
+            Log.d(TAG, "parseDataToParagraph: " + mBodyList.size());
         }
+    }
+
+    public ObservableList<BodyViewModel> getBodyList() {
+        return mBodyList;
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -7,21 +8,22 @@
             type="com.example.xyzreader.model.BodyViewModel"/>
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_article_body"
-            style="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8dp"
-            android:layout_marginEnd="@dimen/_8dp"
             android:fontFamily="@font/kollektif_normal"
             android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+            android:text="@={viewModel.paragraph}"
             android:textColor="@color/ltgray"
-            android:textColorLink="@color/theme_accent" />
-    </LinearLayout>
+            android:textColorLink="@color/theme_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

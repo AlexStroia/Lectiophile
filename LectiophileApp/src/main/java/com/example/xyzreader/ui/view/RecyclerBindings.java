@@ -25,7 +25,6 @@ public class RecyclerBindings {
             recyclerView.addItemDecoration(new DividerDecoration(8));
             recyclerView.setAdapter(adapter);
         }
-
         adapter = (LectiophileAdapter) recyclerView.getAdapter();
         adapter.setData(books);
     }
@@ -38,9 +37,7 @@ public class RecyclerBindings {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
             recyclerView.setAdapter(adapter);
         }
-
         adapter = (FragmentArticleDetailBodyAdapter) recyclerView.getAdapter();
         adapter.setData(body);
-
     }
 }
