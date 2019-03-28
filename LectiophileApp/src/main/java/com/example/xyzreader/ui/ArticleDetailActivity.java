@@ -32,6 +32,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_detail);
+        mBinding.setLifecycleOwner(this);
         if (getIntent() != null) {
             mBookId = getIntent().getIntExtra(getString(R.string.book_click), 0);
             initView(mBookId);

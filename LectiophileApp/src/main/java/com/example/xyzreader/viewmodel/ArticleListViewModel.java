@@ -11,14 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import co.alexdev.data.model.Book;
 import co.alexdev.data.networking.Resource;
 import co.alexdev.data.repo.LectiophileRepository;
 
-public class ArticleListViewModel extends AndroidViewModel implements LifecycleObserver {
+public class ArticleListViewModel extends AndroidViewModel {
 
     private LiveData<Resource<List<Book>>> mBooksLiveData;
     private MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();

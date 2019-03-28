@@ -27,8 +27,8 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_list);
 
         vm = ViewModelProviders.of(this).get(ArticleListViewModel.class);
-        getLifecycle().addObserver(vm);
         mBinding.setViewModel(vm);
+        mBinding.setLifecycleOwner(this);
         initView();
     }
 

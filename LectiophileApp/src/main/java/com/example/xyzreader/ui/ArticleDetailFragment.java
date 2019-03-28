@@ -75,6 +75,7 @@ public class ArticleDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_article_detail, container, false);
         mBinding.setViewModel(vm);
+        mBinding.setLifecycleOwner(this);
 
         mBinding.shareFab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(Objects.requireNonNull(getActivity()))
                 .setType(getString(R.string.share_type))

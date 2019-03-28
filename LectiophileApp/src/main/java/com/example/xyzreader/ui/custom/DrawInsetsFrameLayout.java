@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.xyzreader.ui;
+package com.example.xyzreader.ui.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -27,7 +27,6 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 
 import com.example.xyzreader.R;
-
 
 public class DrawInsetsFrameLayout extends FrameLayout {
     private Drawable mInsetBackground;

@@ -1,34 +1,55 @@
 package com.example.xyzreader.adapter;
 
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import com.example.xyzreader.databinding.ListBodyItemBinding;
+import com.example.xyzreader.model.BodyViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<FragmentArticleDetailBodyAdapter.FragmentArticleDetailAdapterViewHolder> {
 
+    private List<BodyViewModel> mBody;
+
+    public FragmentArticleDetailBodyAdapter() {
+        this.mBody = new ArrayList<>();
+    }
 
     @NonNull
     @Override
     public FragmentArticleDetailAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        ListBodyItemBinding binding = ListBodyItemBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new FragmentArticleDetailAdapterViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FragmentArticleDetailAdapterViewHolder holder, int position) {
-
+        holder.mBinding.setViewModel(mBody.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (mBody == null) return 0;
+        return mBody.size();
     }
 
-    static class FragmentArticleDetailAdapterViewHolder extends RecyclerView.ViewHolder {
+    public void setData(List<BodyViewModel> body) {
+        this.mBody = body;
+        notifyDataSetChanged();
+    }
 
-        public FragmentArticleDetailAdapterViewHolder(@NonNull View itemView) {
-            super(itemView);
+
+    static class FragmentArticleDetailAdapterViewHolder extends RecyclerView.ViewHolder {
+        private ListBodyItemBinding mBinding;
+
+        public FragmentArticleDetailAdapterViewHolder(ListBodyItemBinding binding) {
+            super(binding.getRoot());
+            this.mBinding = binding;
         }
     }
 }

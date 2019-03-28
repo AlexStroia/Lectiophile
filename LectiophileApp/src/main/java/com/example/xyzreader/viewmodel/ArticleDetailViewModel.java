@@ -23,7 +23,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
 
     private LiveData<Book> mBook;
     private LiveData<List<Integer>> mBooksIdsLiveData;
-    private ObservableList<BodyViewModel> mBodyList;
+    public ObservableList<BodyViewModel> mBodyList;
     public BookViewModel mBookViewModel;
     private static final String TAG = "ArticleDetailViewModel";
 
