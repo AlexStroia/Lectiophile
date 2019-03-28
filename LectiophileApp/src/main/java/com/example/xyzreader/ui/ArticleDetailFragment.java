@@ -66,7 +66,7 @@ public class ArticleDetailFragment extends Fragment {
                 .getIntent(), getString(R.string.action_share))));
 
         mBinding.ibBack.setOnClickListener(view -> Objects.requireNonNull(ArticleDetailFragment.this.getActivity()).finish());
-        
+
         return mBinding.getRoot();
     }
 }
