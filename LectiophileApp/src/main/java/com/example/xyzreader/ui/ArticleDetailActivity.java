@@ -1,20 +1,25 @@
 package com.example.xyzreader.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.xyzreader.R;
+import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.databinding.ActivityArticleDetailBinding;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
 
 import java.util.List;
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import co.alexdev.data.model.Book;
 
 
 public class ArticleDetailActivity extends AppCompatActivity {
@@ -23,6 +28,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
 
     private ArticleDetailViewModel vm;
     private ActivityArticleDetailBinding mBinding;
+    private FragmentArticleDetailBodyAdapter adapter;
 
     private int mBookId = 0;
 
@@ -31,6 +37,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_detail);
         mBinding.setLifecycleOwner(this);
+
         if (getIntent() != null) {
             mBookId = getIntent().getIntExtra(getString(R.string.book_click), 0);
             initView(mBookId);
@@ -41,23 +48,34 @@ public class ArticleDetailActivity extends AppCompatActivity {
     private void initView(int id) {
         ViewModelFactory factory = new ViewModelFactory(this.getApplication(), id);
         vm = ViewModelProviders.of(this, factory).get(ArticleDetailViewModel.class);
-        vm.getBook().observe(this, book -> {
-            Log.d(TAG, "initView: " + book.toString());
-        });
-
         LiveData<List<Integer>> mIntegerIdsLiveData = vm.getBooksIdsLiveData();
         mIntegerIdsLiveData.observe(this, idList -> {
             mIntegerIdsLiveData.removeObservers(this);
 
-            ArticleDetailFragment fragment = new ArticleDetailFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(getString(R.string.book_id), id);
-            fragment.setArguments(bundle);
-            changeFragment(fragment);
-        });
-    }
+            LiveData<Book> bookLiveData = vm.getBook();
+            bookLiveData.observe(this, book -> {
+                bookLiveData.removeObservers(this);
+                vm.mapToBookViewModel(bookLiveData.getValue());
+                vm.parseDataToParagraph(book.getBody());
+            });
 
-    private void changeFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commitAllowingStateLoss();
+            vm.getBodyContentLiveData().observe(this, body -> {
+                adapter = new FragmentArticleDetailBodyAdapter();
+                mBinding.rvBody.setLayoutManager(new LinearLayoutManager(this));
+                mBinding.rvBody.setAdapter(adapter);
+                adapter.setData(body);
+            });
+        });
+
+
+        mBinding.shareFab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(this)
+                .setType(getString(R.string.share_type))
+                .setText(getString(R.string.share_data))
+                .getIntent(), getString(R.string.action_share))));
+
+        mBinding.ibBack.setOnClickListener(view -> {
+            finishAfterTransition();
+            finish();
+        });
     }
 }

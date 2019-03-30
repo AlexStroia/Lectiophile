@@ -1,8 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
         <variable
             name="viewModel"
             type="com.example.xyzreader.viewmodel.ArticleDetailViewModel" />
@@ -19,7 +17,7 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                 <ImageView
                     android:id="@+id/photo"
@@ -38,29 +36,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="@android:color/black"
+                    android:background="@color/transparent_background"
                     android:elevation="@dimen/_8dp"
                     android:orientation="vertical"
-                    android:paddingLeft="@dimen/detail_inner_horiz_margin"
-                    android:paddingTop="@dimen/detail_metabar_vert_padding"
-                    android:paddingRight="@dimen/detail_inner_horiz_margin">
+                    android:paddingStart="@dimen/_8dp"
+                    android:paddingTop="@dimen/_8dp"
+                    android:paddingEnd="@dimen/_8dp"
+                    android:paddingBottom="@dimen/_8dp">
 
                     <TextView
                         android:id="@+id/article_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_8dp"
-                        android:fontFamily="@font/kollektif_bold"
-                        android:lineSpacingMultiplier="0.8"
 
-                        android:text="plmmm"
+                        android:fontFamily="@font/kollektif_bold"
+                        android:text="@{viewModel.mBookViewModel.title}"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/detail_title_text_size"
                         android:textStyle="bold" />
-                    <!--
-                                        android:text="@{viewModel.mBookViewModel.title}"
-                    -->
-
 
                     <TextView
                         android:id="@+id/article_byline"
@@ -69,12 +63,8 @@
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_8dp"
                         android:fontFamily="@font/kollektif_italic"
-                        android:text="plmmm"
+                        android:text="@={viewModel.mBookViewModel.author}"
                         android:textColor="@android:color/darker_gray" />
-
-                    <!--
-                        android:text="@{viewModel.mBookViewModel.author}"
--->
                 </LinearLayout>
 
                 <ImageButton
@@ -88,7 +78,7 @@
                     android:contentDescription="@null"
                     android:elevation="@dimen/_8dp"
                     android:focusable="true"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -115,6 +105,6 @@
             android:background="@drawable/add_fab_background"
             android:contentDescription="@string/action_share"
             android:src="@drawable/ic_share"
-            android:stateListAnimator="@anim/fab_state_list_anim" />
+            android:stateListAnimator="@animator/fab_state_list_anim" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

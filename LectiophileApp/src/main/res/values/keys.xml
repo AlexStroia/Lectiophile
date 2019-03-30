@@ -2,4 +2,5 @@
 <resources>
     <string name="book_click">BOOK_ITEM_CLICK</string>
     <string name="book_id">BOOK_ITEM_ID</string>
+    <string name="book_shared_image">BOOK_SHARED_IMAGE</string>
 </resources>

@@ -54,7 +54,6 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
     static class ItemListViewHolder extends RecyclerView.ViewHolder {
 
         private ListItemArticleBinding mBinding;
-        private static final String TAG = "ItemListViewHolder";
 
         ItemListViewHolder(@NonNull ListItemArticleBinding binding) {
             super(binding.getRoot());
@@ -64,7 +63,7 @@ public class LectiophileAdapter extends RecyclerView.Adapter<LectiophileAdapter.
                 int position = getAdapterPosition();
 
                 if (mListener != null) {
-                    mListener.onBookItemClick(mBooks.get(position).getId().get());
+                    mListener.onBookItemClick(mBooks.get(position).getId().get(), mBinding.thumbnail);
                 }
             });
         }

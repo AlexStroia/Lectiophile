@@ -29,11 +29,11 @@ public class ArticleDetailFragment extends Fragment {
     private FragmentArticleDetailBinding mBinding;
     private ArticleDetailViewModel vm;
     private FragmentArticleDetailBodyAdapter adapter;
-    private static final String TAG = "ArticleDetailFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        postponeEnterTransition();
 
         if (getArguments() != null) {
             String key = getString(R.string.book_id);
@@ -42,11 +42,10 @@ public class ArticleDetailFragment extends Fragment {
                 initViewModel(fragmentContentId);
             }
         }
-
         setHasOptionsMenu(true);
     }
 
-    private void initViewModel(int fragmentContentId) {
+    private void initViewModel(final int fragmentContentId) {
         ViewModelFactory factory = new ViewModelFactory(Objects.requireNonNull(this.getActivity()).getApplication(), fragmentContentId);
         vm = ViewModelProviders.of(this.getActivity(), factory).get(ArticleDetailViewModel.class);
 
@@ -72,12 +71,20 @@ public class ArticleDetailFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_article_detail, container, false);
         mBinding.setViewModel(vm);
         mBinding.setLifecycleOwner(this);
+     //   ViewCompat.setTransitionName(mBinding.photo, getString(R.string.TRANSITION_PHOTO));
 
         mBinding.shareFab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(Objects.requireNonNull(getActivity()))
                 .setType(getString(R.string.share_type))
                 .setText(getString(R.string.share_data))
                 .getIntent(), getString(R.string.action_share))));
-        mBinding.ibBack.setOnClickListener(view -> Objects.requireNonNull(ArticleDetailFragment.this.getActivity()).finish());
+
+        mBinding.ibBack.setOnClickListener(view -> {
+            if (getActivity() != null) {
+                getActivity().finishAfterTransition();
+                ArticleDetailFragment.this.getActivity().finish();
+            }
+        });
+
         return mBinding.getRoot();
     }
 }
