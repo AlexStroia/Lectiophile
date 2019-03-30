@@ -1,12 +1,15 @@
 package com.example.xyzreader.viewmodel;
 
 import android.app.Application;
+
 import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.model.ItemToVmMapper;
 import com.example.xyzreader.utils.Constants;
+import com.example.xyzreader.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -20,7 +23,6 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     private LiveData<List<Integer>> mBooksIdsLiveData;
     private MutableLiveData<List<String>> mBodyContentLiveData = new MutableLiveData<>();
     public BookViewModel mBookViewModel;
-    private static final String TAG = "ArticleDetailViewModel";
 
     public ArticleDetailViewModel(@NonNull Application application, int bookId) {
         super(application);
@@ -28,7 +30,6 @@ public class ArticleDetailViewModel extends AndroidViewModel {
         mBook = LectiophileRepository.getInstance(application.getApplicationContext()).getBookById(bookId);
         mBooksIdsLiveData = LectiophileRepository.getInstance(application.getApplicationContext()).getBooksIdList();
         mBookViewModel = new BookViewModel();
-       // mBodyList = new ObservableArrayList<>();
     }
 
     public LiveData<Book> getBook() {
@@ -45,11 +46,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     }
 
     public void parseDataToParagraph(String body) {
-     //new StringToParagraphsMapper().map(body);
-            String[] paragraphs = body.split(Constants.PARAGRAPH_PARAMS.NEW_LINE.WINDOWS_DOS);
-            mBodyContentLiveData.setValue(Arrays.asList(paragraphs));
-
-    //    }
+        mBodyContentLiveData.setValue(Arrays.asList(StringUtils.stringToParagraph(body)));
     }
 
     public MutableLiveData<List<String>> getBodyContentLiveData() {

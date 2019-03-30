@@ -58,7 +58,6 @@ public class ArticleDetailFragment extends Fragment {
         });
 
         vm.getBodyContentLiveData().observe(this, body -> {
-                    mBinding.pbTextView.setVisibility(View.GONE);
                     adapter = new FragmentArticleDetailBodyAdapter();
                     mBinding.rvBody.setLayoutManager(new LinearLayoutManager(this.getActivity()));
                     mBinding.rvBody.setAdapter(adapter);
@@ -78,9 +77,7 @@ public class ArticleDetailFragment extends Fragment {
                 .setType(getString(R.string.share_type))
                 .setText(getString(R.string.share_data))
                 .getIntent(), getString(R.string.action_share))));
-
         mBinding.ibBack.setOnClickListener(view -> Objects.requireNonNull(ArticleDetailFragment.this.getActivity()).finish());
-
         return mBinding.getRoot();
     }
 }
