@@ -16,9 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
-/**
- * An activity representing a single Article detail screen, letting you swipe between articles.
- */
+
 public class ArticleDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "ArticleDetailActivity";
@@ -49,7 +47,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
 
         LiveData<List<Integer>> mIntegerIdsLiveData = vm.getBooksIdsLiveData();
         mIntegerIdsLiveData.observe(this, idList -> {
-            Log.d(TAG, "initView size: " + idList.size());
             mIntegerIdsLiveData.removeObservers(this);
 
             ArticleDetailFragment fragment = new ArticleDetailFragment();
@@ -57,10 +54,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
             bundle.putInt(getString(R.string.book_id), id);
             fragment.setArguments(bundle);
             changeFragment(fragment);
-
-            //     FragmentArticleDetailAdapter adapter = new FragmentArticleDetailAdapter(getSupportFragmentManager(), this);
-            //     adapter.setData(idList);
-            //      mBinding.pager.setAdapter(adapter);
         });
     }
 

@@ -1,6 +1,7 @@
 package com.example.xyzreader.ui;
 
 import android.content.Intent;
+
 import java.util.Objects;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import co.alexdev.data.model.Book;
 
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.xyzreader.R;
+import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.databinding.FragmentArticleDetailBinding;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
@@ -25,6 +28,8 @@ public class ArticleDetailFragment extends Fragment {
 
     private FragmentArticleDetailBinding mBinding;
     private ArticleDetailViewModel vm;
+    private FragmentArticleDetailBodyAdapter adapter;
+    private static final String TAG = "ArticleDetailFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,15 @@ public class ArticleDetailFragment extends Fragment {
             vm.mapToBookViewModel(bookLiveData.getValue());
             vm.parseDataToParagraph(book.getBody());
         });
+
+        vm.getBodyContentLiveData().observe(this, body -> {
+                    mBinding.pbTextView.setVisibility(View.GONE);
+                    adapter = new FragmentArticleDetailBodyAdapter();
+                    mBinding.rvBody.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+                    mBinding.rvBody.setAdapter(adapter);
+                    adapter.setData(body);
+                }
+        );
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.example.xyzreader.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.xyzreader.databinding.ListBodyItemBinding;
-import com.example.xyzreader.model.BodyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<FragmentArticleDetailBodyAdapter.FragmentArticleDetailAdapterViewHolder> {
 
-    private List<BodyViewModel> mBody;
+    private List<String> mBody;
     private static final String TAG = "FragmentArticleDetailBo";
 
     public FragmentArticleDetailBodyAdapter() {
@@ -31,9 +29,7 @@ public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<Fragm
 
     @Override
     public void onBindViewHolder(@NonNull FragmentArticleDetailAdapterViewHolder holder, int position) {
-        holder.mBinding.setViewModel(mBody.get(position));
-        Log.d(TAG, "onBindViewHolder: " + mBody.get(position).getParagraph().get());
-        Log.d(TAG, "onBindViewHolder: " + mBody.size());
+        holder.bind(mBody.get(position));
     }
 
     @Override
@@ -42,7 +38,7 @@ public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<Fragm
         return mBody.size();
     }
 
-    public void setData(List<BodyViewModel> body) {
+    public void setData(List<String> body) {
         this.mBody = body;
         notifyDataSetChanged();
     }
@@ -51,9 +47,13 @@ public class FragmentArticleDetailBodyAdapter extends RecyclerView.Adapter<Fragm
 
         private ListBodyItemBinding mBinding;
 
-        public FragmentArticleDetailAdapterViewHolder(ListBodyItemBinding binding) {
+        FragmentArticleDetailAdapterViewHolder(ListBodyItemBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
+        }
+
+        void bind(String content) {
+            mBinding.tvArticleBody.setText(content);
         }
     }
 }

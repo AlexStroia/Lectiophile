@@ -1,21 +1,16 @@
 package com.example.xyzreader.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
-
-
-import com.example.xyzreader.model.BodyViewModel;
 import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.model.ItemToVmMapper;
-import com.example.xyzreader.model.StringToParagraphsMapper;
+import com.example.xyzreader.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import co.alexdev.data.model.Book;
 import co.alexdev.data.repo.LectiophileRepository;
 
@@ -23,7 +18,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
 
     private LiveData<Book> mBook;
     private LiveData<List<Integer>> mBooksIdsLiveData;
-    private ObservableList<BodyViewModel> mBodyList;
+    private MutableLiveData<List<String>> mBodyContentLiveData = new MutableLiveData<>();
     public BookViewModel mBookViewModel;
     private static final String TAG = "ArticleDetailViewModel";
 
@@ -33,7 +28,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
         mBook = LectiophileRepository.getInstance(application.getApplicationContext()).getBookById(bookId);
         mBooksIdsLiveData = LectiophileRepository.getInstance(application.getApplicationContext()).getBooksIdList();
         mBookViewModel = new BookViewModel();
-        mBodyList = new ObservableArrayList<>();
+       // mBodyList = new ObservableArrayList<>();
     }
 
     public LiveData<Book> getBook() {
@@ -50,13 +45,14 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     }
 
     public void parseDataToParagraph(String body) {
-        if (mBodyList.isEmpty()) {
-            mBodyList = new StringToParagraphsMapper().map(body);
-            Log.d(TAG, "parseDataToParagraph: " + mBodyList.size());
-        }
+     //new StringToParagraphsMapper().map(body);
+            String[] paragraphs = body.split(Constants.PARAGRAPH_PARAMS.NEW_LINE.WINDOWS_DOS);
+            mBodyContentLiveData.setValue(Arrays.asList(paragraphs));
+
+    //    }
     }
 
-    public ObservableList<BodyViewModel> getBodyList() {
-        return mBodyList;
+    public MutableLiveData<List<String>> getBodyContentLiveData() {
+        return mBodyContentLiveData;
     }
 }
