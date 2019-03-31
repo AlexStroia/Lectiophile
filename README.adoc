@@ -3,7 +3,7 @@ Transformed the user experience of a news reading app using Fundamentals Materia
 
 # Features
 
-   • Grid Layout, ViewPager and Collapsing toolbar
+   • Grid Layout and Collapsing toolbar
    • Surface, Elevation, Ripple, and FAB
    • Palette, Background Protection and Aspect Ratio Image
    • Motion, Content Transition and Shared element transition
