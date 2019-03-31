@@ -1,15 +1,21 @@
 package com.example.xyzreader.ui;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.databinding.ActivityArticleDetailBinding;
 import com.example.xyzreader.utils.TransitionUtils;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
+
 import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.databinding.DataBindingUtil;
@@ -70,5 +76,11 @@ public class ArticleDetailActivity extends AppCompatActivity {
                 .getIntent(), getString(R.string.action_share))));
 
         mBinding.ibBack.setOnClickListener(view -> finishAfterTransition());
+    }
+
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        new Handler().postDelayed(() -> mBinding.appbar.setExpanded(false, true), 300);
     }
 }
