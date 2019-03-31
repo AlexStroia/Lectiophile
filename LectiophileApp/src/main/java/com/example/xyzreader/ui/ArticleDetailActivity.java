@@ -2,19 +2,14 @@ package com.example.xyzreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.util.Log;
-import android.view.View;
-
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.databinding.ActivityArticleDetailBinding;
 import com.example.xyzreader.utils.TransitionUtils;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
-
 import java.util.List;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.databinding.DataBindingUtil;
@@ -77,9 +72,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
                 .setText(getString(R.string.share_data))
                 .getIntent(), getString(R.string.action_share))));
 
-        mBinding.ibBack.setOnClickListener(view -> {
-            finishAfterTransition();
-            finish();
-        });
+        mBinding.ibBack.setOnClickListener(view -> finishAfterTransition());
     }
 }
