@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+import android.transition.Slide;
+import android.view.Gravity;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -67,6 +70,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
 
 
     private void initView() {
+        performSlideAnimation();
         TransitionUtils.setTransition(this);
         mAdapter = new LectiophileAdapter();
         mAdapter.setListener(this);
@@ -91,6 +95,16 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
                 vm.mapToBookViewModel(listResourceBooks.data);
             }
         });
+    }
+
+    private void performSlideAnimation() {
+        Slide slide = new Slide(Gravity.BOTTOM);
+        slide.addTarget(mBinding.toolbar);
+
+        slide.setInterpolator(AnimationUtils.loadInterpolator(this,
+                android.R.interpolator.linear_out_slow_in));
+        slide.setDuration(300);
+        getWindow().setEnterTransition(slide);
     }
 
     @Override

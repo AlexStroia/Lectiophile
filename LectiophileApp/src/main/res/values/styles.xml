@@ -24,6 +24,15 @@
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowExitTransition">@transition/exit</item>
+    </style>
+
     <style name="ToolbarFontStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/kollektif_bold</item>
     </style>
