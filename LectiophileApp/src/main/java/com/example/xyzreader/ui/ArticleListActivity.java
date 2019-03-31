@@ -6,9 +6,11 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.xyzreader.R;
@@ -16,8 +18,6 @@ import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.databinding.ActivityArticleListBinding;
 import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
 import com.example.xyzreader.viewmodel.ArticleListViewModel;
-
-import java.util.Objects;
 
 public class ArticleListActivity extends AppCompatActivity implements OnBookSelectedListener {
 
@@ -41,7 +41,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     public void onActivityReenter(int resultCode, Intent data) {
         super.onActivityReenter(resultCode, data);
 
-}
+    }
 
     private void initView() {
         mAdapter = new LectiophileAdapter();
@@ -73,11 +73,11 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     @Override
     public void onBookItemClick(int id, ImageView imageView) {
         Intent intent = new Intent(this, ArticleDetailActivity.class);
-        intent.putExtra(getString(R.string.book_click),id);
+        intent.putExtra(getString(R.string.book_click), id);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
-                (this,imageView,
-                        Objects.requireNonNull(ViewCompat.getTransitionName(imageView)));
-        startActivity(intent, options.toBundle());
+                (this, imageView,
+                        imageView.getTransitionName());
+        ActivityCompat.startActivity(this, intent, options.toBundle());
         Log.d(TAG, "onBookItemClick: " + id);
     }
 }

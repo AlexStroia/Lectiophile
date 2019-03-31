@@ -11,7 +11,6 @@ import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
 
 import java.util.List;
-import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
@@ -30,33 +29,34 @@ public class ArticleDetailActivity extends AppCompatActivity {
     private ActivityArticleDetailBinding mBinding;
     private FragmentArticleDetailBodyAdapter adapter;
 
-    private int mBookId = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_detail);
-        mBinding.setLifecycleOwner(this);
+        getWindow().setEnterTransition(null);
 
         if (getIntent() != null) {
-            mBookId = getIntent().getIntExtra(getString(R.string.book_click), 0);
-            initView(mBookId);
-            Log.d(TAG, "onCreate: " + mBookId);
+            int mBookId = getIntent().getIntExtra(getString(R.string.book_click), 0);
+            ViewModelFactory factory = new ViewModelFactory(this.getApplication(), mBookId);
+            vm = ViewModelProviders.of(this, factory).get(ArticleDetailViewModel.class);
+            mBinding.setLifecycleOwner(this);
+            initView();
         }
     }
 
-    private void initView(int id) {
-        ViewModelFactory factory = new ViewModelFactory(this.getApplication(), id);
-        vm = ViewModelProviders.of(this, factory).get(ArticleDetailViewModel.class);
+    private void initView() {
         LiveData<List<Integer>> mIntegerIdsLiveData = vm.getBooksIdsLiveData();
+
         mIntegerIdsLiveData.observe(this, idList -> {
             mIntegerIdsLiveData.removeObservers(this);
 
             LiveData<Book> bookLiveData = vm.getBook();
             bookLiveData.observe(this, book -> {
+                Log.d(TAG, "initView: " + book.toString());
                 bookLiveData.removeObservers(this);
                 vm.mapToBookViewModel(bookLiveData.getValue());
                 vm.parseDataToParagraph(book.getBody());
+                mBinding.setViewModel(vm);
             });
 
             vm.getBodyContentLiveData().observe(this, body -> {
@@ -66,7 +66,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
                 adapter.setData(body);
             });
         });
-
 
         mBinding.shareFab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(this)
                 .setType(getString(R.string.share_type))

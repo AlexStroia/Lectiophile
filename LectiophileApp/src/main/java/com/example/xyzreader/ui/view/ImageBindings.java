@@ -24,7 +24,7 @@ public class ImageBindings {
 
             @Override
             public void onError(Exception e) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

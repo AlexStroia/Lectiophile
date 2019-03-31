@@ -27,6 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
+                    android:elevation="@dimen/_8dp"
                     app:buttonGravity="bottom"
                     app:layout_collapseMode="parallax">
 

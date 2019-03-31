@@ -26,6 +26,7 @@
                     android:layout_gravity="top"
                     android:contentDescription="@null"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/randimg"
                     android:transitionName="@string/TRANSITION_PHOTO"
                     app:imageUrl="@{viewModel.mBookViewModel.thumb}"
                     app:layout_collapseMode="parallax"

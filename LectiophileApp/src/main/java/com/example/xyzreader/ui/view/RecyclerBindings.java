@@ -1,6 +1,5 @@
 package com.example.xyzreader.ui.view;
 
-import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.utils.DividerDecoration;

@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.model.ItemToVmMapper;
-import com.example.xyzreader.utils.Constants;
 import com.example.xyzreader.utils.StringUtils;
 
 import java.util.Arrays;
@@ -24,6 +23,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     private LiveData<List<Integer>> mBooksIdsLiveData;
     private MutableLiveData<List<String>> mBodyContentLiveData = new MutableLiveData<>();
     public BookViewModel mBookViewModel;
+
     private static final String TAG = "ArticleDetailViewModel";
     public ArticleDetailViewModel(@NonNull Application application, int bookId) {
         super(application);
