@@ -93,7 +93,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
 
         mBinding.shareFab.setOnClickListener(view -> startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(this)
                 .setType(getString(R.string.share_type))
-                .setText(getString(R.string.share_data))
+                .setText(vm.mBookViewModel.getTitle().get())
                 .getIntent(), getString(R.string.action_share))));
 
         mBinding.ibBack.setOnClickListener(view -> finishAfterTransition());
