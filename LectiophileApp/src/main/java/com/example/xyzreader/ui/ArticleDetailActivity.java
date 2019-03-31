@@ -52,12 +52,8 @@ public class ArticleDetailActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-
-        mLayout = (LinearLayoutManager) mBinding.rvBody.getLayoutManager();
-        if (mLayout != null) {
-            mScrollPos = mLayout.onSaveInstanceState();
-            outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
-        }
+        mScrollPos = mLayout.onSaveInstanceState();
+        outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
     }
 
     @Override
@@ -88,7 +84,8 @@ public class ArticleDetailActivity extends AppCompatActivity {
             bodyContentLiveData.observe(this, body -> {
                 bodyContentLiveData.removeObservers(this);
                 adapter = new FragmentArticleDetailBodyAdapter();
-                mBinding.rvBody.setLayoutManager(new LinearLayoutManager(this));
+                mLayout = new LinearLayoutManager(this);
+                mBinding.rvBody.setLayoutManager(mLayout);
                 mBinding.rvBody.setAdapter(adapter);
                 adapter.setData(body);
             });

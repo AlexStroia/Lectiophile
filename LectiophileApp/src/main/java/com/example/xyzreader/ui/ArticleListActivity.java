@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
@@ -29,7 +30,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     private ArticleListViewModel vm;
     private ActivityArticleListBinding mBinding;
     private LectiophileAdapter mAdapter;
-    private LinearLayoutManager mLayout;
+    private StaggeredGridLayoutManager mLayout;
     private Parcelable mScrollPos;
 
     @Override
@@ -46,7 +47,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
 
-         mLayout = (LinearLayoutManager) mBinding.recyclerView.getLayoutManager();
+         mLayout = (StaggeredGridLayoutManager) mBinding.recyclerView.getLayoutManager();
          if(mLayout != null) {
              mScrollPos = mLayout.onSaveInstanceState();
              outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
@@ -57,7 +58,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        if(savedInstanceState != null && savedInstanceState.containsKey(getString(R.string.scroll_pos))) {
+        if(savedInstanceState != null) {
             mScrollPos = savedInstanceState.getParcelable(getString(R.string.scroll_pos));
             Objects.requireNonNull(mBinding.recyclerView.getLayoutManager()).onRestoreInstanceState(mScrollPos);
         }
