@@ -21,8 +21,6 @@ import co.alexdev.data.model.Book;
 
 public class ArticleDetailActivity extends AppCompatActivity {
 
-    private static final String TAG = "ArticleDetailActivity";
-
     private ArticleDetailViewModel vm;
     private ActivityArticleDetailBinding mBinding;
     private FragmentArticleDetailBodyAdapter adapter;
@@ -50,7 +48,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
 
             LiveData<Book> bookLiveData = vm.getBook();
             bookLiveData.observe(this, book -> {
-                Log.d(TAG, "initView: " + book.toString());
                 bookLiveData.removeObservers(this);
                 vm.mapToBookViewModel(bookLiveData.getValue());
                 vm.parseDataToParagraph(book.getBody());

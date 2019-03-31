@@ -1,7 +1,6 @@
 package com.example.xyzreader.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.example.xyzreader.model.BookViewModel;
 import com.example.xyzreader.model.ItemToVmMapper;
@@ -24,7 +23,6 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     private MutableLiveData<List<String>> mBodyContentLiveData = new MutableLiveData<>();
     public BookViewModel mBookViewModel;
 
-    private static final String TAG = "ArticleDetailViewModel";
     public ArticleDetailViewModel(@NonNull Application application, int bookId) {
         super(application);
 
@@ -43,9 +41,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
 
     /*Get the current data of Books and make them Observable*/
     public void mapToBookViewModel(Book book) {
-        Log.d(TAG, "mapToBookViewModel: " + book.toString());
         mBookViewModel = new ItemToVmMapper().map(book);
-        Log.d(TAG, "mapToBookViewModel: " + mBookViewModel.getThumb().get());
     }
 
     public void parseDataToParagraph(String body) {

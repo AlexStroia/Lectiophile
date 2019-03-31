@@ -2,17 +2,13 @@ package com.example.xyzreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.view.ViewCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.xyzreader.R;
@@ -24,7 +20,6 @@ import com.example.xyzreader.viewmodel.ArticleListViewModel;
 
 public class ArticleListActivity extends AppCompatActivity implements OnBookSelectedListener {
 
-    private static final String TAG = "ArticleListActivity";
     private ArticleListViewModel vm;
     private ActivityArticleListBinding mBinding;
     private LectiophileAdapter mAdapter;
@@ -62,7 +57,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         vm.getBooks().observe(this, listResourceBooks -> {
             if (listResourceBooks.data != null && listResourceBooks.data.size() > 0) {
                 vm.mapToBookViewModel(listResourceBooks.data);
-                Log.d(TAG, "fetchData: " + vm.getBooksObservable().size());
             }
         });
     }
@@ -75,6 +69,5 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
                 (this, imageView,
                         imageView.getTransitionName());
         ActivityCompat.startActivity(this, intent, options.toBundle());
-        Log.d(TAG, "onBookItemClick: " + id);
     }
 }
