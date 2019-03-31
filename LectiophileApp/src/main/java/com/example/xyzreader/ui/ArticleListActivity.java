@@ -2,14 +2,18 @@ package com.example.xyzreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
@@ -18,11 +22,15 @@ import com.example.xyzreader.utils.TransitionUtils;
 import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
 import com.example.xyzreader.viewmodel.ArticleListViewModel;
 
+import java.util.Objects;
+
 public class ArticleListActivity extends AppCompatActivity implements OnBookSelectedListener {
 
     private ArticleListViewModel vm;
     private ActivityArticleListBinding mBinding;
     private LectiophileAdapter mAdapter;
+    private LinearLayoutManager mLayout;
+    private Parcelable mScrollPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,29 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         mBinding.setLifecycleOwner(this);
         initView();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+         mLayout = (LinearLayoutManager) mBinding.recyclerView.getLayoutManager();
+         if(mLayout != null) {
+             mScrollPos = mLayout.onSaveInstanceState();
+             outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
+         }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState != null && savedInstanceState.containsKey(getString(R.string.scroll_pos))) {
+            mScrollPos = savedInstanceState.getParcelable(getString(R.string.scroll_pos));
+            Objects.requireNonNull(mBinding.recyclerView.getLayoutManager()).onRestoreInstanceState(mScrollPos);
+        }
+    }
+
+
 
     private void initView() {
         TransitionUtils.setTransition(this);

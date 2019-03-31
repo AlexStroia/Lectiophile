@@ -3,4 +3,5 @@
     <string name="book_click">BOOK_ITEM_CLICK</string>
     <string name="book_id">BOOK_ITEM_ID</string>
     <string name="book_shared_image">BOOK_SHARED_IMAGE</string>
+    <string name="scroll_pos">SCROLL_TO_POSITION</string>
 </resources>

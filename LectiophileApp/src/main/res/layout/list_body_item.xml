@@ -15,7 +15,7 @@
             android:layout_marginStart="@dimen/_8dp"
             android:layout_marginEnd="@dimen/_8dp"
             android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-            android:textColor="@color/ltgray"
+            android:textColor="@color/secondary_text"
             android:textColorLink="@color/theme_accent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
