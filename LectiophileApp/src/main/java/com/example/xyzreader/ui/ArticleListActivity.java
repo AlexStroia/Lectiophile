@@ -103,7 +103,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
 
         slide.setInterpolator(AnimationUtils.loadInterpolator(this,
                 android.R.interpolator.linear_out_slow_in));
-        slide.setDuration(300);
+        slide.setDuration(350);
         getWindow().setEnterTransition(slide);
     }
 
