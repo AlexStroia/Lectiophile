@@ -2,7 +2,9 @@ package com.example.xyzreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
 import com.example.xyzreader.databinding.ActivityArticleListBinding;
+import com.example.xyzreader.utils.TransitionUtils;
 import com.example.xyzreader.utils.listeners.OnBookSelectedListener;
 import com.example.xyzreader.viewmodel.ArticleListViewModel;
 
@@ -30,20 +33,14 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_list);
-
         vm = ViewModelProviders.of(this).get(ArticleListViewModel.class);
         mBinding.setViewModel(vm);
         mBinding.setLifecycleOwner(this);
         initView();
     }
 
-    @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-
-    }
-
     private void initView() {
+        TransitionUtils.setTransition(this);
         mAdapter = new LectiophileAdapter();
         mAdapter.setListener(this);
         fetchData();

@@ -2,11 +2,14 @@ package com.example.xyzreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
+import android.view.View;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.FragmentArticleDetailBodyAdapter;
 import com.example.xyzreader.databinding.ActivityArticleDetailBinding;
+import com.example.xyzreader.utils.TransitionUtils;
 import com.example.xyzreader.viewmodel.ArticleDetailViewModel;
 import com.example.xyzreader.viewmodel.factory.ViewModelFactory;
 
@@ -33,7 +36,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_article_detail);
-        getWindow().setEnterTransition(null);
+        TransitionUtils.setTransition(this);
 
         if (getIntent() != null) {
             int mBookId = getIntent().getIntExtra(getString(R.string.book_click), 0);
@@ -59,7 +62,9 @@ public class ArticleDetailActivity extends AppCompatActivity {
                 mBinding.setViewModel(vm);
             });
 
-            vm.getBodyContentLiveData().observe(this, body -> {
+            LiveData<List<String>> bodyContentLiveData = vm.getBodyContentLiveData();
+            bodyContentLiveData.observe(this, body -> {
+                bodyContentLiveData.removeObservers(this);
                 adapter = new FragmentArticleDetailBodyAdapter();
                 mBinding.rvBody.setLayoutManager(new LinearLayoutManager(this));
                 mBinding.rvBody.setAdapter(adapter);
