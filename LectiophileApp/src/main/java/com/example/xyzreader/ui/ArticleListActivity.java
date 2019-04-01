@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -15,9 +16,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import co.alexdev.data.model.Book;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
@@ -35,6 +35,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     private LectiophileAdapter mAdapter;
     private StaggeredGridLayoutManager mLayout;
     private Parcelable mScrollPos;
+    private static final String TAG = "ArticleListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         }
     }
 
-
-
     private void initView() {
         performSlideAnimation();
         TransitionUtils.setTransition(this);
@@ -93,6 +92,10 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         vm.getBooks().observe(this, listResourceBooks -> {
             if (listResourceBooks.data != null && listResourceBooks.data.size() > 0) {
                 vm.mapToBookViewModel(listResourceBooks.data);
+
+                for(Book book: listResourceBooks.data) {
+                    Log.d(TAG, "fetchData: " + book.toString());
+                }
             }
         });
     }

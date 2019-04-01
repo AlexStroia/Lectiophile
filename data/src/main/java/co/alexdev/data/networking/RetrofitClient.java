@@ -1,5 +1,11 @@
 package co.alexdev.data.networking;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.text.DateFormat;
+
 import co.alexdev.data.BuildConfig;
 import co.alexdev.data.api.LectiophileService;
 import co.alexdev.data.model.livedata.LiveDataCallAdapterFactory;
@@ -16,8 +22,7 @@ public class RetrofitClient {
 
     private RetrofitClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         mRetrofit = new Retrofit.Builder().baseUrl(BuildConfig.URL)
                 .client(new OkHttpClient().newBuilder().addInterceptor(interceptor).build())
                 .addConverterFactory(GsonConverterFactory.create())

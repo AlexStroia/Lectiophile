@@ -1,5 +1,7 @@
 package co.alexdev.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,11 +12,17 @@ public class Book {
     @PrimaryKey
     @NonNull
     private int id;
+    @SerializedName("title")
     private String title;
+    @SerializedName("author")
     private String author;
+    @SerializedName("body")
     private String body;
+    @SerializedName("thumb")
     private String thumb;
+    @SerializedName("aspect_ratio")
     private Double aspect_ratio;
+    @SerializedName("published_date")
     private String published_date;
 
     public Book(int id, String title, String author, String body, String thumb, Double aspect_ratio, String published_date) {
