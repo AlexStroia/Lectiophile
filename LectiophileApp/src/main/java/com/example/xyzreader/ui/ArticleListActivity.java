@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,7 +15,6 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import co.alexdev.data.model.Book;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.adapter.LectiophileAdapter;
@@ -35,7 +32,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     private LectiophileAdapter mAdapter;
     private StaggeredGridLayoutManager mLayout;
     private Parcelable mScrollPos;
-    private static final String TAG = "ArticleListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +47,11 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
 
-         mLayout = (StaggeredGridLayoutManager) mBinding.recyclerView.getLayoutManager();
-         if(mLayout != null) {
-             mScrollPos = mLayout.onSaveInstanceState();
-             outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
-         }
+        mLayout = (StaggeredGridLayoutManager) mBinding.recyclerView.getLayoutManager();
+        if(mLayout != null) {
+            mScrollPos = mLayout.onSaveInstanceState();
+            outState.putParcelable(getString(R.string.scroll_pos), mScrollPos);
+        }
     }
 
     @Override
@@ -67,6 +63,8 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
             Objects.requireNonNull(mBinding.recyclerView.getLayoutManager()).onRestoreInstanceState(mScrollPos);
         }
     }
+
+
 
     private void initView() {
         performSlideAnimation();
@@ -92,10 +90,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnBookSele
         vm.getBooks().observe(this, listResourceBooks -> {
             if (listResourceBooks.data != null && listResourceBooks.data.size() > 0) {
                 vm.mapToBookViewModel(listResourceBooks.data);
-
-                for(Book book: listResourceBooks.data) {
-                    Log.d(TAG, "fetchData: " + book.toString());
-                }
             }
         });
     }

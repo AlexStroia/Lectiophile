@@ -24,9 +24,7 @@ android {
 
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "URL", '"https://d17h27t6h515a5.cloudfront.net/"'
-
         }
     }
     compileOptions {

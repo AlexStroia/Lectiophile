@@ -23,7 +23,6 @@ public class ArticleListViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
     private ObservableList<BookViewModel> mBooksObservable;
     private BookViewModel mBookViewModel;
-    private MutableLiveData<Book> mBookObservable = new MutableLiveData<>();
 
     public ArticleListViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +35,9 @@ public class ArticleListViewModel extends AndroidViewModel {
 
     /*Get the current data of Books and make them Observable*/
     public void mapToBookViewModel(List<Book> books) {
+        if (mBooksObservable.isEmpty()) {
+            mBooksObservable.addAll(new ItemsToVmMapper().map(books));
+        }
     }
 
     public LiveData<Resource<List<Book>>> getBooks() {
