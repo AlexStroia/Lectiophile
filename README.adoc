@@ -1,9 +1,33 @@
 # Lectiophile
+
 Transformed the user experience of a news reading app using Fundamentals Material Design guidelines.
 
-# Features
+![lectiophile_splash](https://user-images.githubusercontent.com/35500199/55667206-1e246980-580e-11e9-9ec7-6c73bdccaddd.jpg)
+![lectiophile_main](https://user-images.githubusercontent.com/35500199/55667209-2d0b1c00-580e-11e9-87c5-ba541edf361f.jpg)
+![lectiophile_detail](https://user-images.githubusercontent.com/35500199/55667213-35fbed80-580e-11e9-9e6c-2f2e191db09a.jpg)
 
+# Rubric
+General App Usage
+
+   • App should display informations about book from provided network resource.
+   • App should allow navigation between individual books.
+   • App conforms to common standards found in the Android Nanodegree General Project Guidelines.
+    
    • Grid Layout and Collapsing toolbar
    • Surface, Elevation, Ripple, and FAB
    • Palette, Background Protection and Aspect Ratio Image
    • Motion, Content Transition and Shared element transition
+
+# Features
+
+    • MVVM
+    • Livedata
+    • Repository Pattern
+    • Network bounds Resource
+    • Data binding
+    • ExoPlayer
+    • Retrofit
+    • Espresso
+    • Picasso
+    • Room
+ 
