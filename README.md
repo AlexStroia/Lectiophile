@@ -29,7 +29,6 @@ General App Usage
     • Repository Pattern
     • Network bounds Resource
     • Data binding
-    • ExoPlayer
     • Retrofit
     • Espresso
     • Picasso
